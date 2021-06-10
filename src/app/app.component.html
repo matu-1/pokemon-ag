@@ -3,12 +3,14 @@
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <app-pocke-box
       *ngFor="let item of pokemones"
-      fxFlex="25%"
       fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      fxFlex="25%"
       [title]="item.name"
       [text]="item.url"
       [image]="item.image"
     ></app-pocke-box>
   </div>
+  <button mat-raised-button color="primary" (click)="loadMore()">Cargar mas</button>
 </div>
 <router-outlet></router-outlet>

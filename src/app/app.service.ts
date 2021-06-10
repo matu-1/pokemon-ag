@@ -15,8 +15,8 @@ export class AppService {
     return valuesArray[valuesArray.length - 2];
   }
 
-  getAll() {
-    return this.http.get(AppService.url).pipe(
+  getAll(cantidad: number, page: number) {
+    return this.http.get(AppService.url + '?limit=' + cantidad + '&offset=' + ((page - 1) * cantidad)).pipe(
       map((res: any) => {
         return res.results.map((item: any) => {
           return {
