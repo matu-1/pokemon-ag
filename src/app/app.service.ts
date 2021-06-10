@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Pokemon } from './pokemon';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +17,11 @@ export class AppService {
     return valuesArray[valuesArray.length - 2];
   }
 
-  getAll(cantidad: number, page: number) {
-    return this.http.get(AppService.url + '?limit=' + cantidad + '&offset=' + ((page - 1) * cantidad)).pipe(
+  getAll(cantidad: number, page: number): Observable<Pokemon[]> {
+    const url = `${AppService.url}?limit=${cantidad}&offset=${
+      (page - 1) * cantidad
+    }`;
+    return this.http.get(url).pipe(
       map((res: any) => {
         return res.results.map((item: any) => {
           return {

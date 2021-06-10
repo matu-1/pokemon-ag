@@ -1,5 +1,5 @@
 <app-toolbar></app-toolbar>
-<div class="container p-2">
+<div #container class="container p-2">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <app-pocke-box
       *ngFor="let item of pokemones"
@@ -11,6 +11,27 @@
       [image]="item.image"
     ></app-pocke-box>
   </div>
-  <button mat-raised-button color="primary" (click)="loadMore()">Cargar mas</button>
+  <div fxLayout="row wrap" fxLayoutAlign="center center">
+    <div fxFlex.xs="100%" fxFlex="25%">
+      <button
+        *ngIf="this.pokemones.length > 0"
+        class="btn-block"
+        mat-raised-button
+        color="primary"
+        (click)="loadMore()"
+      >
+        CARGAR MAS
+      </button>
+    </div>
+  </div>
+  <button
+    mat-fab
+    color="primary"
+    class="floating"
+    matTooltip='Desplazarse al final'
+    (click)="offsetEnd(container)"
+  >
+    <mat-icon>arrow_downward</mat-icon>
+  </button>
 </div>
 <router-outlet></router-outlet>

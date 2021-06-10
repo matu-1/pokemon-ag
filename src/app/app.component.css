@@ -1,0 +1,15 @@
+.btn-block {
+  width: 100%;
+  margin-top: 16px;
+}
+app-pocke-box {
+  transition: opacity 0.3s;
+}
+app-pocke-box:hover {
+  opacity: 0.5;
+}
+.floating {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}

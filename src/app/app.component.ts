@@ -1,11 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AppService } from './app.service';
-
-interface Pokemon {
-  name: string;
-  url: string;
-  image: string;
-}
+import { Pokemon } from './pokemon';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +12,8 @@ export class AppComponent implements OnInit {
   page = 1;
   title = 'pokemon-ag';
   pokemones: Pokemon[] = [];
+  @ViewChild('container')
+  container!: ElementRef<HTMLElement>;
 
   constructor(private appServie: AppService) {}
 
@@ -24,14 +21,24 @@ export class AppComponent implements OnInit {
     this.findAll();
   }
 
-  findAll(cantidad: number = 20, page: number = 1) {
-    this.appServie.getAll(cantidad, page).subscribe((res) => {
-      this.pokemones.push(...res);
-    });
+  async findAll(cantidad: number = 20, page: number = 1) {
+    const res = await this.appServie.getAll(cantidad, page).toPromise();
+    this.pokemones.push(...res);
   }
 
-  loadMore() {
+  async loadMore() {
     this.page++;
-    this.findAll(this.cantidad, this.page);
+    await this.findAll(this.cantidad, this.page);
+    setTimeout(() => {
+      window.scroll({
+        top: window.pageYOffset + 300,
+        behavior: 'smooth',
+      });
+    }, 500);
+  }
+
+  offsetEnd(element: HTMLElement) {
+    // this.container.nativeElement.scrollIntoView()
+    element.scrollIntoView({ block: 'end', behavior: 'smooth' });
   }
 }
