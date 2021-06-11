@@ -8,10 +8,10 @@ import { Pokemon } from './pokemon';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  cantidad = 20;
+  cantidad = 100;
   page = 1;
   title = 'pokemon-ag';
-  pokemones: Pokemon[] = [];
+  pokemones!: Pokemon[];
   @ViewChild('container')
   container!: ElementRef<HTMLElement>;
 
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
 
   async findAll(cantidad: number = 20, page: number = 1) {
     const res = await this.appServie.getAll(cantidad, page).toPromise();
+    if (!this.pokemones) this.pokemones = [];
     this.pokemones.push(...res);
   }
 
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit {
         top: window.pageYOffset + 300,
         behavior: 'smooth',
       });
-    }, 500);
+    }, 300);
   }
 
   offsetEnd(element: HTMLElement) {

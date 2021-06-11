@@ -15,4 +15,13 @@ export class PockeBoxComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onLoadedImage(img: HTMLImageElement) {
+    img.classList.remove('loading-animation');
+  }
+  onErrorImage(img: HTMLImageElement) {
+    img.classList.remove('loading-animation')
+    img.src =
+      'https://i.pinimg.com/originals/fd/78/c4/fd78c47f2a009df65b5b5a46f4437399.png';
+  }
 }

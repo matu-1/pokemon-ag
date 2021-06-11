@@ -2,3 +2,7 @@ mat-card-content {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.img-pokemon {
+  height: 250px;
+  object-fit: cover;
+}
